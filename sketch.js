@@ -8,6 +8,7 @@ var torre, torreimg;
 
 var angulo;
 var cannon;
+var ballCannon;
 
 
 function preload() {
@@ -30,9 +31,12 @@ function setup() {
   torre = Bodies.rectangle(160, 350, 160, 310, options);
   World.add(world,torre);
 
+  angleMode(DEGREES);
   angulo = 20;
 
   cannon = new Cannon(180, 110, 130, 100, angulo);
+
+  ballCannon = new BallCannon(cannon.x, cannon.y);
  
 }
 
@@ -50,5 +54,13 @@ function draw() {
   pop();
 
   cannon.show();
+  ballCannon.show();
+
+}
+function keyReleased(){
+  if(keyCode === DOWN_ARROW){
+    ballCannon.shoot();
+
+  }
 
 }
