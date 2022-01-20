@@ -9,6 +9,7 @@ class BallCannon {
         this.image = loadImage("./assets/cannonball.png");
         this.body = Bodies.circle(x, y, this.raio, options);
         World.add(world,this.body);
+        this.trace = [];
     }
 
     show(){
@@ -17,6 +18,16 @@ class BallCannon {
         imageMode(CENTER);
         image(this.image, pos.x, pos.y, this.raio, this.raio);
         pop();
+        if(this.body.velocity.x > 0 && pos.x > 10){
+            var positionn = [pos.x, pos.y];
+            this.trace.push(positionn);
+
+        }
+        for(var i = 0; i<this.trace.length; i++){
+            image(this.image, this.trace[i][0], this.trace[i][1], 5, 5);
+
+        }
+
     }
 
     shoot(){

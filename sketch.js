@@ -1,3 +1,27 @@
+/*Matrizes
+//Exemplo simples de matriz
+var matriz1 = [1,2,3,4,5];
+//console.log(matriz1);
+console.log(matriz1[2]);
+
+//Matriz com diferentes tipos de dados
+var matriz2 = [1, "Melissa", true];
+//console.log(matriz2);
+console.log(matriz2[1]);
+
+//Matriz de matrizes
+var matriz3 = [[1,2,3,4,5], [3,4,5,6,7], [5,6,8,9,10]];
+//console.log(matriz3);
+console.log(matriz3[1][2]);
+
+//Como adicionar elementos na matriz
+matriz1.push(10);
+matriz1.push(20);
+console.log(matriz1);
+matriz1.pop();
+matriz1.pop();
+console.log(matriz1);*/
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -9,6 +33,9 @@ var torre, torreimg;
 var angulo;
 var cannon;
 var ballCannon;
+
+var ballas = [];
+console.log(ballas);
 
 
 function preload() {
@@ -35,8 +62,6 @@ function setup() {
   angulo = 20;
 
   cannon = new Cannon(180, 110, 130, 100, angulo);
-
-  ballCannon = new BallCannon(cannon.x, cannon.y);
  
 }
 
@@ -54,12 +79,35 @@ function draw() {
   pop();
 
   cannon.show();
-  ballCannon.show();
+
+  for(var i = 0; i<ballas.length; i ++){
+    mostrar(ballas[i], i);
+
+  }
 
 }
 function keyReleased(){
   if(keyCode === DOWN_ARROW){
-    ballCannon.shoot();
+    ballas[ballas.length-1].shoot();
+
+  }
+
+}
+
+function keyPressed(){
+  if(keyCode === DOWN_ARROW){
+    var ballCannon = new BallCannon(cannon.x, cannon.y);
+    ballas.push(ballCannon);
+
+    
+
+  }
+
+}
+
+function mostrar(ballCannon, i){
+  if(ballCannon){
+    ballCannon.show();
 
   }
 
