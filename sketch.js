@@ -35,7 +35,11 @@ var cannon;
 var ballCannon;
 
 var ballas = [];
-console.log(ballas);
+//console.log(ballas);
+
+var boat;
+
+var boatis = [];
 
 
 function preload() {
@@ -80,6 +84,8 @@ function draw() {
 
   cannon.show();
 
+  mostrarBoatis();
+
   for(var i = 0; i<ballas.length; i ++){
     mostrar(ballas[i], i);
 
@@ -109,6 +115,28 @@ function mostrar(ballCannon, i){
   if(ballCannon){
     ballCannon.show();
 
+  }
+
+}
+
+function mostrarBoatis(){
+  if(boatis.length > 0){
+    if(boatis[boatis.length-1] === undefined || boatis[boatis.length-1].body.position.x < width-300){
+      var positions = [-40, -60, -70, -20];
+      var position = random(positions);
+      var boat = new Boat(width, height-100, 170, 170, position);
+      boatis.push(boat);
+    }
+    for(var i = 0; i < boatis.length; i++){
+      if(boatis[i]){
+        Matter.Body.setVelocity(boatis[i].body, {x: -0.9, y: 0});
+        boatis[i].show();
+      }
+    }
+
+  } else{
+    var boat = new Boat(width, height-60, 170, 170, -60);
+    boatis.push(boat);
   }
 
 }
