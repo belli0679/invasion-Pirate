@@ -8,6 +8,14 @@ class Boat {
         World.add(world,this.body);
     }
 
+    eraser(index){ 
+        setTimeout(() => {
+            Matter.World.remove(world, boatis[index].body);
+            delete boatis[index];
+        }, 2000);
+
+    }
+
     show(){
         var pos = this.body.position;
         var angle = this.body.angle;

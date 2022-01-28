@@ -88,7 +88,7 @@ function draw() {
 
   for(var i = 0; i<ballas.length; i ++){
     mostrar(ballas[i], i);
-
+    colidionBallas(i);
   }
 
 }
@@ -114,7 +114,10 @@ function keyPressed(){
 function mostrar(ballCannon, i){
   if(ballCannon){
     ballCannon.show();
+    if(ballCannon.body.position.x >= width || ballCannon.body.position.y >= height-50){
+      ballCannon.eraser(i);
 
+    }
   }
 
 }
@@ -137,6 +140,20 @@ function mostrarBoatis(){
   } else{
     var boat = new Boat(width, height-60, 170, 170, -60);
     boatis.push(boat);
+  }
+
+}
+
+function colidionBallas(index){
+  for(var i = 0; i < boatis.length; i++){
+    if(ballas[index] !== undefined && boatis[i] !== undefined){
+      var collido = Matter.SAT.collides(ballas[index].body, boatis[i].body);
+      if(collido.collided){
+        boatis[i].eraser(i);
+        Matter.World.remove(world, ballas[index].body);
+        delete ballas[index];
+      }
+    }
   }
 
 }

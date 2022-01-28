@@ -30,6 +30,15 @@ class BallCannon {
 
     }
 
+    eraser(index){ 
+        Matter.Body.setVelocity(this.body, {x:0, y:0});
+        setTimeout(() => {
+            Matter.World.remove(world, this.body);
+            delete ballas[index];
+        }, 1000);
+
+    }
+
     shoot(){
         
         var newAngulo = cannon.angulo - 28;
