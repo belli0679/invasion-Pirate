@@ -59,7 +59,7 @@ function preload() {
  quebraDado = loadJSON("./assets/boat/brokenBoat.json");
  quebraSpritesheet = loadImage("./assets/boat/brokenBoat.png");
  aguaDado = loadJSON("./assets/waterSplash/waterSplash.json");
- aguaSritesheet = loadImage("./assets/waterSplash/waterSplash.png");
+ aguaSpritesheet = loadImage("./assets/waterSplash/waterSplash.png");
 }
 function setup() {
 
