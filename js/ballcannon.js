@@ -6,19 +6,28 @@ class BallCannon {
         }
 
         this.raio = 30;
+        this.speed = 0.05;
         this.image = loadImage("./assets/cannonball.png");
+        this.animation = [this.image];
+        this.fundou = false;
         this.body = Bodies.circle(x, y, this.raio, options);
         World.add(world,this.body);
         this.trace = [];
+        
+    }
+
+    animater(){
+        this.speed += 0.05;
     }
 
     show(){
         var pos = this.body.position;
+        var index = floor(this.speed % this.animation.length);
         push();
         imageMode(CENTER);
-        image(this.image, pos.x, pos.y, this.raio, this.raio);
+        image(this.animation[index], pos.x, pos.y, this.raio, this.raio);
         pop();
-        if(this.body.velocity.x > 0 && pos.x > 10){
+        if(this.body.velocity.x > 0 && pos.x > 10 && !this.fundou){
             var positionn = [pos.x, pos.y];
             this.trace.push(positionn);
 
@@ -31,7 +40,11 @@ class BallCannon {
     }
 
     eraser(index){ 
+        this.fundou = true;
         Matter.Body.setVelocity(this.body, {x:0, y:0});
+        this.animation = aguaAnime;
+        this.speed = 0.05;
+        this.raio = 150;
         setTimeout(() => {
             Matter.World.remove(world, this.body);
             delete ballas[index];
